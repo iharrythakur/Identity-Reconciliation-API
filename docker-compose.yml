@@ -1,0 +1,27 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres.ftfajgauvlcticnwozwp
+      POSTGRES_PASSWORD: TIET102103009
+    ports:
+      - "6543:6543"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql://postgres.ftfajgauvlcticnwozwp:TIET102103009@aws-0-us-east-2.pooler.supabase.com:6543/postgres
+    depends_on:
+      - postgres
+    volumes:
+      - .:/app
+
+volumes:
+  postgres_data:
