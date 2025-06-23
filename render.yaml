@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: bitespeed-identity-api
+    env: docker
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: DEBUG
+        value: false
+    healthCheckPath: /health
